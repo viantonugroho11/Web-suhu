@@ -12,7 +12,8 @@
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-        var suhu = {!! json_encode($suhu) !!}};
+        var suhu = {!! json_encode($suhu) !!};
+        // var suhu = [["test","test","test"],[2020,1,38]];
         console.log(suhu);
         google.charts.load('current', {
             'packages': ['corechart']
@@ -30,7 +31,7 @@
             };
             var chart = new google.visualization.LineChart(document.getElementById('linechart'));
             chart.draw(data, options);
-        }        
+        }
     </script>
 </body>
 

@@ -13,17 +13,20 @@ class SuhuController extends Controller
         $suhu = SuhuModel::select(
                         DB::raw("year(created_at) as year"),
                         DB::raw("SUM(kode_area) as kode_area"),
-                        DB::raw("SUM(nilai_suhu) as nilai_suhu")) 
+                        DB::raw("SUM(nilai_suhu) as nilai_suhu1"))
                     ->orderBy(DB::raw("YEAR(created_at)"))
                     ->groupBy(DB::raw("YEAR(created_at)"))
                     ->get();
-  
+                    // dd($suhu);
         $res[] = ['Year', 'kode_area', 'nilai_suhu'];
+        // $res=[];
         foreach ($suhu as $key => $val) {
-            $res[++$key] = [$val->year, (int)$val->kode_area, (int)$val->nilai_suhu];
+            $res[++$key] = [2020, (int)$val->kode_area, (int)$val->nilai_suhu1];
+            // $res += [2020, (int)$val->kode_area, (int)$val->nilai_suhu1];
         }
-  
+        // dd($res);
+        // $res1=$res->toArray();
         return view('v_suhu')
-            ->with('suhu', json_encode($res));
+            ->with('suhu', $res);
     }
 }
